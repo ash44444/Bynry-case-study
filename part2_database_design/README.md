@@ -1,55 +1,28 @@
--- MySQL Schema Design for Bynry Backend Case Study
+1. Questions to Ask the Product Team (Missing Requirements)
 
-/*
------------------------------------------------------
-PART 1: CLEAN ERD STRUCTURE (TEXT REPRESENTATION)
------------------------------------------------------
+Inventory Threshold:
+  Do we need to store a minimum stock threshold per product per warehouse?
+  Should low-stock alerts be per company or per warehouse?
 
-Company ──< Warehouse ──< ProductInventory >── Product ──< ProductBundleItems
-                               │                      │
-                               │                      └── ProductSuppliers >── Supplier
-                               └── InventoryHistory
-*/
+Pricing Model:
+  Can products have different prices in different warehouses or for different companies?
+  Is there any discount or promotional price that we need to store?
 
-/*
------------------------------------------------------
-PART 2: SQL CREATE TABLE STATEMENTS (MySQL)
------------------------------------------------------
-*/
+Bundle Products:
+  Are bundles fixed compositions, or can components vary dynamically?
+  Do bundles have their own inventory count or just derive from component stock?
 
+Suppliers:
+  Can a supplier supply multiple companies, or is it company-specific?
+  Do we need to track supplier lead times (delivery days)?
 
+Inventory Changes:
+  Should we track which user made the inventory change?
+  Do we need to store the cost of inventory change?
 
-/*
------------------------------------------------------
-PART 3: QUESTIONS FOR PRODUCT TEAM (MISSING INFO)
------------------------------------------------------
-*/
-/*
-1. Should bundle pricing be set manually or auto-calculated from components?
-2. Should each warehouse track inventory threshold (min/max)?
-3. Are inventory reasons (e.g., SALE, RETURN) predefined or custom text?
-4. Can a supplier serve multiple companies, or just one?
-5. Do products have variants (color, size) or only base SKUs?
- 6. Should deleted products/warehouses be soft-deleted?
-7. Should we track which user made an inventory change (audit trail)?
-8. Should inventory changes be reversible (undo/correct)?
+Data Retention:
+  How long should inventory history be stored?
+  Do we need soft delete or permanent delete?
 
-/*
------------------------------------------------------
-PART 4: DESIGN JUSTIFICATIONS
------------------------------------------------------
-*/
-
-Used separate product_inventory table to support many-to-many relationships between products and warehouses.
- Used ENUM for inventory change types for consistency and indexing.
-Used UNIQUE constraints (e.g., SKU, product-warehouse pair) to avoid duplicates.
-Used composite keys in mapping tables to ensure clean linkage.
- Used CHECK constraints to avoid invalid bundle self-references.
- Used timestamps to support auditing and reporting.
-All foreign keys are indexed by default in MySQL for faster joins.
-
- Easy integration with Express.js backend using Knex.js or Sequelize ORM.
- Scalable schema supports adding more metadata later (e.g., stock thresholds, warehouse types).
-
-
-*/
+Location Details:
+  Do warehouses have address details (city, state, country, GPS)?
