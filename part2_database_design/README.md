@@ -26,3 +26,13 @@ Data Retention:
 
 Location Details:
   Do warehouses have address details (city, state, country, GPS)?
+
+2.Indexes & Constraints Justifications
+UNIQUE (product_id, warehouse_id) → ensures no duplicate product entries in the same warehouse.
+UNIQUE (product_id, supplier_id) → prevents duplicate supplier links.
+CHECK (bundle_product_id != component_product_id) → avoids recursive loops in bundles.
+Foreign Keys with ON DELETE CASCADE → ensures cleanup of dependent data when parent is deleted.
+Threshold column in product_inventory → allows warehouse-level low-stock configuration.
+Indexes on foreign keys (automatically created in MySQL) → improves JOIN query performance.
+
+  
