@@ -53,7 +53,7 @@
 
    ## ERD (Entity Relationship Diagram)
 
-![ERD Diagram](docs/erd.png)
+![ERD Diagram](./erd.png)
 
 
 
