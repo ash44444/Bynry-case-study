@@ -105,12 +105,12 @@ with status **500 Internal Server Error**.
    - Create database and run SQL migrations/schema.
 3. **Environment Variables (`.env`)**
    ```
-   DB_USER=postgres
-   DB_PASSWORD=yourpassword
-   DB_NAME=inventorydb
-   DB_HOST=localhost
-   DB_PORT=5432
-   PORT=3000
+   DB_USER=
+   DB_PASSWORD=
+   DB_NAME=
+   DB_HOST=
+   DB_PORT=
+   PORT=
    ```
 4. **Start App**
    ```bash
