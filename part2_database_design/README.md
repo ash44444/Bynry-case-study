@@ -51,6 +51,12 @@
    Improves performance of JOIN queries used for reports and alerts.
 
 
+   ## ERD (Entity Relationship Diagram)
+
+![ERD Diagram](docs/erd.png)
+
+
+
 
 
   
