@@ -1,7 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from "typeorm";
 import { Supplier } from "./Supplier";
 import { Inventory } from "./Inventory";
-import { Sales } from "./Sales";
 
 @Entity("products")
 export class Product {
@@ -11,21 +10,14 @@ export class Product {
   @Column({ type: "varchar", length: 255 })
   name: string;
 
-  @Column({ type: "varchar", length: 100, unique: true })
-  sku: string;
-
-  @Column({ type: "decimal", precision: 10, scale: 2 })
-  price: number;
-
-  @Column({ type: "integer", default: 20 }) // threshold example
+  @Column({ type: "integer", default: 0 })
   threshold: number;
 
-  @ManyToOne(() => Supplier, supplier => supplier.products)
-  supplier: Supplier;
-
+  // ---- Inventory Relation (Many-to-Many with Warehouse via Inventory)
   @OneToMany(() => Inventory, inventory => inventory.product)
   inventory: Inventory[];
 
-  @OneToMany(() => Sales, sale => sale.product)
-  sales: Sales[];
+  // ---- Suppliers Relation (Many-to-Many)
+  @ManyToMany(() => Supplier, supplier => supplier.products)
+  suppliers: Supplier[];
 }
